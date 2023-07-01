@@ -7,10 +7,18 @@ import cors from 'cors'
 import categoryroute from './routes/categoryRoute.js'
 import productroute from  './routes/productroute.js'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 //creating server
 const app=express()
 
+dotenv.config()
+
+//Database Connection
+connectDB();
+
+const __filename= fileURLToPath(import.meta.url)
+const __dirname=path.dirname(__filename)
 
 //middlewares
 app.use(cors())
@@ -19,10 +27,6 @@ app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname,'./client/build')))
 
 //Dotenv listen
-dotenv.config()
-
-//Database Connection
-connectDB();
 
 
 //routes
